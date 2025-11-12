@@ -6,6 +6,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeFilter, setActiveFilter] = useState('все');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const portfolioItems = [
     { id: 1, title: 'Интернет-магазин', category: 'веб', description: 'Современный e-commerce проект', image: 'https://cdn.poehali.dev/projects/65f84921-1bde-4d45-aaf5-de671c0d9aee/files/70085e23-82f1-421e-b7f8-b38abd70b077.jpg' },
@@ -55,10 +56,37 @@ const Index = () => {
             <a href="#blog" className="text-foreground hover:text-primary transition-colors">Блог</a>
             <a href="#contacts" className="text-foreground hover:text-primary transition-colors">Контакты</a>
           </div>
-          <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-            Связаться
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button className="hidden md:flex bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+              Связаться
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+            </Button>
+          </div>
         </nav>
+        
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t animate-slide-in">
+            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+              <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Главная</a>
+              <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Портфолио</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">О нас</a>
+              <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Услуги</a>
+              <a href="#reviews" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Отзывы</a>
+              <a href="#blog" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Блог</a>
+              <a href="#contacts" onClick={() => setMobileMenuOpen(false)} className="text-foreground hover:text-primary transition-colors py-2">Контакты</a>
+              <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 w-full mt-2">
+                Связаться
+              </Button>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="home" className="pt-32 pb-20 px-4 relative overflow-hidden">
